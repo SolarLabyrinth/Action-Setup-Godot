@@ -1,0 +1,50 @@
+name: "Setup Godot"
+
+description: "Downloads the specified Godot version and the Export Templates from the godotengine/godot-builds repo on GitHub."
+
+inputs:
+  version:
+    description: "The version of Godot to setup"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Godot
+      shell: bash
+      run: |
+        # Do this in the system's temporary directory.
+        cd $RUNNER_TEMP
+
+        # Download the specified godot version from the github release page.
+        wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip
+
+        # Extract the godot executable into the temporary directory.
+        unzip godot.zip
+
+        # Copy the godot executable to the github user's binary folder.
+        mkdir -p ${HOME}/bin
+        mv Godot_v${{ inputs.version }}_linux.x86_64 ${HOME}/bin/godot
+
+        # Add the github user's binary folder to their path, so they can use godot from anywhere on the system.
+        echo "${HOME}/bin" >> $GITHUB_PATH
+
+    - name: Download Export Templates
+      shell: bash
+      run: |
+        # Do this in the system's temporary directory.
+        cd $RUNNER_TEMP
+
+        # Download the export templates for the specified godot version.
+        wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
+
+        # Extract the templates from the zip file into the temporary directory.
+        unzip templates.tpz
+
+        # Move the templates to the correct location for godot to see them when exporting.
+        # Note: Godot's download urls look like "4.4-stable" but the template directory needs to be "4.4.stable" with a period instead of dash. We rename it here.
+        EXPORT_TEMPLATES_DIR=~/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
+        mkdir -p $EXPORT_TEMPLATES_DIR
+        mv ./templates/* $EXPORT_TEMPLATES_DIR
+      env:
+        INPUTS_VERSION: ${{ inputs.version }}
