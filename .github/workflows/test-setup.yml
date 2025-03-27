@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        version: ["4.3-stable", "4.4-stable"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+
+      - name: Confirm Godot Setup
+        run: godot --version
