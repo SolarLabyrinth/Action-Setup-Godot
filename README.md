@@ -17,5 +17,5 @@ This action will download export templates and provide access to the godot binar
 - name: Build Game
   run: |
     mkdir -p ./build
-    godot --headless --export-debug "Linux" ./build/game.exe
+    godot --headless --export-debug "Windows" ./build/game.exe
 ```
