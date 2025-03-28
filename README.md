@@ -1,4 +1,4 @@
-# Setup Godot Action
+# Action: Setup Godot
 
 A GitHub Action to install Godot on a GitHub Actions runner.
 
