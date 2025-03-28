@@ -36,7 +36,6 @@ runs:
         rm -f godot.zip
 
         mv $GODOT_NAME ${{ inputs.name }}
-        rm godot.zip
         ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
 
