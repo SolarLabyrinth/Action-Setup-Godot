@@ -45,4 +45,4 @@ runs:
         mv ./templates/* $EXPORT_TEMPLATES_DIR
       env:
         INPUTS_VERSION: ${{ inputs.version }}
-        TEMPLATE_DOWNLOAD_URI: "https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip"
+        TEMPLATE_DOWNLOAD_URI: "https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz"
