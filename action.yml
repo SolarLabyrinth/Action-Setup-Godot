@@ -24,25 +24,23 @@ runs:
     - name: Install Godot
       shell: bash
       run: |
-        cd $RUNNER_TEMP 
-        wget -O godot.zip -q $GODOT_DOWNLOAD_URI
-        unzip godot.zip 
-        mkdir -p $INSTALL_DIR  
-        mv Godot_v${{ inputs.version }}_linux.x86_64 $INSTALL_DIR/${{ inputs.name }} 
+        cd $RUNNER_TEMP
+        wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip
+        unzip godot.zip
+        INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
+        mkdir -p $INSTALL_DIR
+        mv Godot_v${{ inputs.version }}_linux.x86_64 ${INSTALL_DIR}/${{ inputs.name }}
+        ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
-      env:
-        INSTALL_DIR: ${HOME}/.godot-install-dir/${{ inputs.version }}
-        GODOT_DOWNLOAD_URI: "https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip"
 
     - name: Download Export Templates
       shell: bash
       run: |
-        cd $RUNNER_TEMP 
-        wget -O templates.tpz -q $TEMPLATE_DOWNLOAD_URI
+        cd $RUNNER_TEMP
+        wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
         unzip templates.tpz
         EXPORT_TEMPLATES_DIR=~/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
         mkdir -p $EXPORT_TEMPLATES_DIR
         mv ./templates/* $EXPORT_TEMPLATES_DIR
       env:
         INPUTS_VERSION: ${{ inputs.version }}
-        TEMPLATE_DOWNLOAD_URI: "https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz"
