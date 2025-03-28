@@ -1,6 +1,6 @@
-name: "Setup Godot"
+name: "Action Setup Godot"
 
-description: "Downloads the specified Godot version and the Export Templates from the godotengine/godot-builds repo on GitHub."
+description: "Downloads the specified Godot version and its Export Templates from the godotengine/godot-builds repo on GitHub."
 
 inputs:
   version:
