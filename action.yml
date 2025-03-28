@@ -29,6 +29,7 @@ runs:
         cd $INSTALL_DIR
 
         GODOT_NAME=Godot_v${{ inputs.version }}_linux.x86_64
+        GODOT_NAME=Godot_v${{ inputs.version }}_mono_linux_x86_64
 
         wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/${GODOT_NAME}.zip
         unzip godot.zip
