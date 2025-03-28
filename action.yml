@@ -33,7 +33,7 @@ runs:
         ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
       env:
-        INSTALL_DIR: ${HOME}/.godot-install-dir/${{ inputs.version }}
+        INSTALL_DIR: "${HOME}/.godot-install-dir/${{ inputs.version }}"
 
     - name: Download Export Templates
       shell: bash
