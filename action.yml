@@ -24,14 +24,16 @@ runs:
     - name: Install Godot
       shell: bash
       run: |
-        cd $RUNNER_TEMP
+        mkdir -p $INSTALL_DIR
+        cd $INSTALL_DIR
         wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip
         unzip godot.zip
-        INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
-        mkdir -p $INSTALL_DIR
-        mv Godot_v${{ inputs.version }}_linux.x86_64 ${INSTALL_DIR}/${{ inputs.name }}
-        ls -la $INSTALL_DIR
+        mv Godot_v${{ inputs.version }}_linux.x86_64 ${{ inputs.name }}
+        rm godot.zip
+        ll $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
+      env:
+        INSTALL_DIR: ${HOME}/.godot-install-dir/${{ inputs.version }}
 
     - name: Download Export Templates
       shell: bash
