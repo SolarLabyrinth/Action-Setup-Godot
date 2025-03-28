@@ -30,7 +30,7 @@ runs:
         unzip godot.zip
         mv Godot_v${{ inputs.version }}_linux.x86_64 ${{ inputs.name }}
         rm godot.zip
-        ll $INSTALL_DIR
+        ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
       env:
         INSTALL_DIR: ~/.godot-install-dir/${{ inputs.version }}
