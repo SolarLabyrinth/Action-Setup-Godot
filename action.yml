@@ -24,7 +24,7 @@ runs:
     - name: Install Godot
       shell: bash
       run: |
-        INSTALL_DIR=${{ env.HOME }}/.godot-install-dir/${{ inputs.version }}
+        INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
         mkdir -p $INSTALL_DIR
         cd $INSTALL_DIR
 
