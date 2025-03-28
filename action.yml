@@ -28,10 +28,13 @@ runs:
         mkdir -p $INSTALL_DIR
         cd $INSTALL_DIR
 
-        wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip
-        unzip godot.zip
+        GODOT_NAME=Godot_v${{ inputs.version }}_linux.x86_64
 
-        mv Godot_v${{ inputs.version }}_linux.x86_64 ${{ inputs.name }}
+        wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/${GODOT_NAME}.zip
+        unzip godot.zip
+        rm -f godot.zip
+
+        mv $GODOT_NAME ${{ inputs.name }}
         rm godot.zip
         ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
