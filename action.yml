@@ -26,14 +26,25 @@ runs:
       run: |
         INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
         mkdir -p $INSTALL_DIR
+
+        echo "Creating $INSTALL_DIR dir"
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          GODOT_NAME="Godot_v${{ inputs.version }}_mono_linux_x86_64"
+        else
+          GODOT_NAME="Godot_v${{ inputs.version }}_linux.x86_64"
+        fi
+
+        echo "Downloading: $GODOT_NAME"
+
+        # Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64
+
         cd $INSTALL_DIR
-
-        GODOT_NAME=Godot_v${{ inputs.version }}_linux.x86_64
-        GODOT_NAME=Godot_v${{ inputs.version }}_mono_linux_x86_64
-
         wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/${GODOT_NAME}.zip
         unzip godot.zip
         rm -f godot.zip
+
+
 
         mv $GODOT_NAME ${{ inputs.name }}
         ls -la $INSTALL_DIR
