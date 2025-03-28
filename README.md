@@ -10,9 +10,9 @@ This action will download export templates and provide access to the godot binar
 
 ```yml
 - name: Setup Godot
-  uses: SolarLabyrinth/Action-Setup-Godot@v1
+  uses: SolarLabyrinth/Action-Setup-Godot@v1.0.1
   with:
-    version: 4.4-stable
+    version: 4.4.1-stable
 
 - name: Build Game
   run: |
