@@ -38,9 +38,11 @@ runs:
       shell: bash
       run: |
         cd $RUNNER_TEMP 
-        wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz  
+        wget -O templates.tpz -q $TEMPLATE_DOWNLOAD_URI
+        unzip templates.tpz
         EXPORT_TEMPLATES_DIR=~/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
         mkdir -p $EXPORT_TEMPLATES_DIR
         mv ./templates/* $EXPORT_TEMPLATES_DIR
       env:
         INPUTS_VERSION: ${{ inputs.version }}
+        TEMPLATE_DOWNLOAD_URI: "https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip"
