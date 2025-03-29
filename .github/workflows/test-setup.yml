@@ -31,7 +31,7 @@ jobs:
         run: |
           cd ./project/new-game-project
           mkdir -p ./build
-          godot --headless --export-debug "Windows" ./build/game.x86_64
+          godot --headless --export-debug "Windows" ./build/game.exe
 
       - name: Build Linux
         run: |
@@ -43,4 +43,4 @@ jobs:
         run: |
           cd ./project/new-game-project
           mkdir -p ./build
-          godot --headless --export-debug "Mac" ./build/game.x86_64
+          godot --headless --export-debug "Mac" ./build/game.zip
