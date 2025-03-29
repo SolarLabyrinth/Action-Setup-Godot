@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  platforms:
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,6 +30,26 @@ jobs:
 
       - name: Build ${{ matrix.platform }}
         run: |
-          cd ./project/new-game-project
+          cd ./project/test-project
           mkdir -p ./build
           godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
+
+  renaming:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        name: ["godot", "other-name"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: "4.4.1-stable"
+          name: ${{ matrix.name }}
+
+      - name: Confirm Godot Setup
+        run: ${{ matrix.name }} --version
