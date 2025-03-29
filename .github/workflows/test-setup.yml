@@ -26,3 +26,8 @@ jobs:
 
       - name: Confirm Godot Setup
         run: godot --version
+
+      - name: Build Game
+        run: |
+          mkdir -p ./build
+          godot --headless --export-debug "Linux" ./build/game.x86_64
