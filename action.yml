@@ -60,14 +60,14 @@ runs:
 
         if [ "${{ inputs.csharp }}" = "true" ]; then
           wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_export_templates.tpz
+          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}.mono
         else
           wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
+          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
         fi
 
         unzip templates.tpz
         rm -rf templates.tpz
-
-        EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
 
         mkdir -p $EXPORT_TEMPLATES_DIR
         mv ./templates/* $EXPORT_TEMPLATES_DIR
