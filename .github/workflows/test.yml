@@ -11,7 +11,15 @@ jobs:
 
     strategy:
       matrix:
-        version: ["4.3-stable", "4.4.1-stable", "4.5-dev1"]
+        version:
+          [
+            "4.0.4-stable",
+            "4.1.4-stable",
+            "4.2.2-stable",
+            "4.3-stable",
+            "4.4.1-stable",
+            "4.5-dev1",
+          ]
         csharp: [true, false]
         platform: ["Windows", "Linux", "Mac"]
 
