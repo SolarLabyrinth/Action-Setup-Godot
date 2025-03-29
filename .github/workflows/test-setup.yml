@@ -11,8 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        # version: ["4.3-stable", "4.4.1-stable", "4.5-dev1"]
-        version: ["4.4.1-stable"]
+        version: ["4.3-stable", "4.4.1-stable", "4.5-dev1"]
         csharp: [true, false]
 
     steps:
@@ -28,8 +27,20 @@ jobs:
       - name: Confirm Godot Setup
         run: godot --version
 
-      - name: Build Game
+      - name: Build Windows
+        run: |
+          cd ./project/new-game-project
+          mkdir -p ./build
+          godot --headless --export-debug "Windows" ./build/game.x86_64
+
+      - name: Build Linux
         run: |
           cd ./project/new-game-project
           mkdir -p ./build
           godot --headless --export-debug "Linux" ./build/game.x86_64
+
+      - name: Build Mac
+        run: |
+          cd ./project/new-game-project
+          mkdir -p ./build
+          godot --headless --export-debug "Mac" ./build/game.x86_64
