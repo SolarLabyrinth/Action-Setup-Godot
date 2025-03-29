@@ -10,7 +10,7 @@ This action will download export templates and provide access to the godot binar
 
 ```yml
 - name: Setup Godot
-  uses: SolarLabyrinth/Action-Setup-Godot@v1
+  uses: SolarLabyrinth/Action-Setup-Godot@v2
   with:
     version: 4.4.1-stable
 
@@ -18,4 +18,16 @@ This action will download export templates and provide access to the godot binar
   run: |
     mkdir -p ./build
     godot --headless --export-debug "Windows" ./build/game.exe
+```
+### Variables
+
+```yml
+- name: Setup Godot
+  uses: SolarLabyrinth/Action-Setup-Godot@v2
+  with:
+    version: 4.4.1-stable
+    # Optional. Defaults to false
+    csharp: false
+    # Optional. Defaults to "godot"
+    name: godot
 ```
