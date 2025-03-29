@@ -13,6 +13,7 @@ jobs:
       matrix:
         version: ["4.3-stable", "4.4.1-stable", "4.5-dev1"]
         csharp: [true, false]
+        platform: ["Windows", "Linux", "Mac"]
 
     steps:
       - name: Checkout Repository
@@ -27,20 +28,8 @@ jobs:
       - name: Confirm Godot Setup
         run: godot --version
 
-      - name: Build Windows
+      - name: Build ${{ matrix.platform }}
         run: |
           cd ./project/new-game-project
           mkdir -p ./build
-          godot --headless --export-debug "Windows" ./build/game.exe
-
-      - name: Build Linux
-        run: |
-          cd ./project/new-game-project
-          mkdir -p ./build
-          godot --headless --export-debug "Linux" ./build/game.x86_64
-
-      - name: Build Mac
-        run: |
-          cd ./project/new-game-project
-          mkdir -p ./build
-          godot --headless --export-debug "Mac" ./build/game.zip
+          godot --headless --export-debug "${{ matrix.platform }}" ./build/game
