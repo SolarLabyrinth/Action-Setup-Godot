@@ -10,7 +10,7 @@ inputs:
   csharp:
     description: "Downloads the mono version of godot."
     type: boolean
-    default: true
+    default: false
     required: true
   name:
     description: "The name to use for the godot executable. Defaults to 'godot'"

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  platforms:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,7 +34,7 @@ jobs:
           mkdir -p ./build
           godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
 
-  renaming:
+  rename:
     runs-on: ubuntu-latest
 
     strategy:
