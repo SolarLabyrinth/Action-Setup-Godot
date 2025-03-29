@@ -38,7 +38,7 @@ jobs:
 
       - name: Build ${{ matrix.platform }}
         run: |
-          cd ./project/test-project
+          cd ./project
           mkdir -p ./build
           godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
 
