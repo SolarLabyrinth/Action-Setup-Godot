@@ -22,6 +22,7 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
+          csharp: ${{ matrix.csharp }}
 
       - name: Confirm Godot Setup
         run: godot --version
