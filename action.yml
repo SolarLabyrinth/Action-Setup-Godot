@@ -10,7 +10,7 @@ inputs:
   csharp:
     description: "Downloads the mono version of godot."
     type: boolean
-    default: false
+    default: true
     required: true
   name:
     description: "The name to use for the godot executable. Defaults to 'godot'"
@@ -27,26 +27,29 @@ runs:
         INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
         mkdir -p $INSTALL_DIR
 
-        echo "Creating $INSTALL_DIR dir"
+        echo "Creating $INSTALL_DIR"
 
         if [ "${{ inputs.csharp }}" = "true" ]; then
-          GODOT_NAME="Godot_v${{ inputs.version }}_mono_linux_x86_64"
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_linux_x86_64.zip
         else
-          GODOT_NAME="Godot_v${{ inputs.version }}_linux.x86_64"
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux.x86_64.zip
         fi
 
-        echo "Downloading: $GODOT_NAME"
-
-        # Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64
+        echo "Downloading: $GODOT_DOWNLOAD_URL"
 
         cd $INSTALL_DIR
-        wget -O godot.zip -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/${GODOT_NAME}.zip
+        wget -O godot.zip -q $GODOT_DOWNLOAD_URL
         unzip godot.zip
-        rm -f godot.zip
+        rm -rf godot.zip
 
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          mv Godot_v${{ inputs.version }}_mono_linux_x86_64/* .
+          mv Godot_v${{ inputs.version }}_mono_linux.x86_64 ${{ inputs.name }}
+          rm -rf Godot_v${{ inputs.version }}_mono_linux_x86_64
+        else
+          mv Godot_v${{ inputs.version }}_linux.x86_64 ${{ inputs.name }}
+        fi
 
-
-        mv $GODOT_NAME ${{ inputs.name }}
         ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
 
