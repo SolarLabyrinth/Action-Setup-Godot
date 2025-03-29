@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        version:
+          [
+            "4.0.4-stable",
+            "4.1.4-stable",
+            "4.2.2-stable",
+            "4.3-stable",
+            "4.4.1-stable",
+            "4.5-dev1",
+          ]
+        csharp: [true, false]
+        platform: ["Windows", "Linux", "Mac"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+          csharp: ${{ matrix.csharp }}
+
+      - name: Confirm Godot Setup
+        run: godot --version
+
+      - name: Build ${{ matrix.platform }}
+        run: |
+          cd ./project
+          mkdir -p ./build
+          godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
+
+  rename:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        name: ["godot", "other-name"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: "4.4.1-stable"
+          name: ${{ matrix.name }}
+
+      - name: Confirm Godot Setup
+        run: ${{ matrix.name }} --version
