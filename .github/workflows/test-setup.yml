@@ -30,5 +30,6 @@ jobs:
 
       - name: Build Game
         run: |
+          cd ./project/new-game-project
           mkdir -p ./build
           godot --headless --export-debug "Linux" ./build/game.x86_64
