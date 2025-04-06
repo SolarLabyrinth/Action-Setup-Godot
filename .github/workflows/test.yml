@@ -68,7 +68,7 @@ jobs:
         run: |
           cd ./projects/godot3
           mkdir -p ./build
-          godot --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
+          godot --export "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
 
   rename:
     runs-on: ubuntu-latest
