@@ -31,3 +31,16 @@ This action will download export templates and provide access to the godot binar
     # Optional. Defaults to "godot"
     name: godot
 ```
+
+### Supported Versions
+
+This action is tested by exporting a small Godot project to the following target platforms.
+
+|Version|Windows|Linux|Mac|Windows - C#|Linux - C#|Mac - C#|
+|-------|-------|-----|---|------------|----------|--------|
+|4.5-dev1|✅|✅|✅|✅|✅|✅|
+|4.4.1-stable|✅|✅|✅|✅|✅|✅|
+|4.3-stable|✅|✅|✅|✅|✅|✅|
+|4.2.2-stable|✅|✅|✅|✅|✅|✅|
+|4.1.4-stable|✅|✅|✅|✅|✅|✅|
+|4.0.4-stable|✅|✅|✅|✅|✅|✅|
