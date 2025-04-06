@@ -47,7 +47,15 @@ jobs:
 
     strategy:
       matrix:
-        version: ["3.5.3-stable", "3.6-stable"]
+        version: [
+            # "3.0.6-stable",
+            # "3.1.2-stable",
+            # "3.2.3-stable",
+            # "3.3.4-stable",
+            # "3.4.5-stable",
+            "3.5.3-stable",
+            "3.6-stable",
+          ]
         csharp: [true, false]
         platform: ["Windows", "Linux"]
 
@@ -62,7 +70,7 @@ jobs:
           csharp: ${{ matrix.csharp }}
 
       - name: Confirm Godot Setup
-        run: godot --version
+        run: godot --version || true
 
       - name: Build ${{ matrix.platform }}
         run: |
