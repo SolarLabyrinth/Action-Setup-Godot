@@ -1,6 +1,6 @@
 # Action: Setup Godot
 
-A GitHub Action to install Godot on a GitHub Actions runner.
+A GitHub Action to install Godot 4 on a GitHub Actions runner.
 
 > Note: Only supported on Ubuntu runners with Godot 4+.
 
