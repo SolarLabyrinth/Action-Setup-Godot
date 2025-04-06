@@ -3,8 +3,8 @@ name: "Action Setup Godot"
 description: "Downloads the specified Godot version and its Export Templates from the godotengine/godot-builds repo on GitHub."
 
 branding:
-  icon: 'play'
-  color: 'blue'
+  icon: "play"
+  color: "blue"
 
 inputs:
   version:
@@ -25,7 +25,41 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Godot
+    - name: Install Godot 3
+      if: startsWith(inputs.version, '3')
+      shell: bash
+      run: |
+        INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
+        mkdir -p $INSTALL_DIR
+
+        echo "Creating $INSTALL_DIR"
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_linux_headless_64.zip
+        else
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_linux_headless.64.zip
+        fi
+
+        echo "Downloading: $GODOT_DOWNLOAD_URL"
+
+        cd $INSTALL_DIR
+        wget -O godot.zip -q $GODOT_DOWNLOAD_URL
+        unzip godot.zip
+        rm -rf godot.zip
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          mv Godot_v${{ inputs.version }}_mono_linux_headless_64/* .
+          mv Godot_v${{ inputs.version }}_mono_linux_headless.64 ${{ inputs.name }}
+          rm -rf Godot_v${{ inputs.version }}_mono_linux_x86_64
+        else
+          mv Godot_v${{ inputs.version }}_linux_headless.64 ${{ inputs.name }}
+        fi
+
+        ls -la $INSTALL_DIR
+        echo $INSTALL_DIR >> $GITHUB_PATH
+
+    - name: Install Godot 4
+      if: startsWith(inputs.version, '4')
       shell: bash
       run: |
         INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
@@ -58,6 +92,30 @@ runs:
         echo $INSTALL_DIR >> $GITHUB_PATH
 
     - name: Download Export Templates
+      if: startsWith(inputs.version, '3')
+      shell: bash
+      run: |
+        cd $RUNNER_TEMP
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_export_templates.tpz
+          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/templates/${INPUTS_VERSION/-/.}.mono
+        else
+          wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
+          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/templates/${INPUTS_VERSION/-/.}
+        fi
+
+        unzip templates.tpz
+        rm -rf templates.tpz
+
+        mkdir -p $EXPORT_TEMPLATES_DIR
+        mv ./templates/* $EXPORT_TEMPLATES_DIR
+        ls -la $EXPORT_TEMPLATES_DIR
+      env:
+        INPUTS_VERSION: ${{ inputs.version }}
+
+    - name: Download Export Templates
+      if: startsWith(inputs.version, '4')
       shell: bash
       run: |
         cd $RUNNER_TEMP
