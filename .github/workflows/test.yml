@@ -47,12 +47,13 @@ jobs:
 
     strategy:
       matrix:
-        version: [
-            # "3.0.6-stable",
-            # "3.1.2-stable",
-            # "3.2.3-stable",
-            # "3.3.4-stable",
-            # "3.4.5-stable",
+        version:
+          [
+            "3.0.6-stable",
+            "3.1.2-stable",
+            "3.2.3-stable",
+            "3.3.4-stable",
+            "3.4.5-stable",
             "3.5.3-stable",
             "3.6-stable",
           ]
@@ -69,7 +70,8 @@ jobs:
           version: ${{ matrix.version }}
           csharp: ${{ matrix.csharp }}
 
-      - name: Confirm Godot Setup
+      - name: Print Godot Version
+        # Godot < 3.6 throws error code 255 for some reason even though it's successful.
         run: godot --version || true
 
       - name: Build ${{ matrix.platform }}
