@@ -47,9 +47,9 @@ jobs:
 
     strategy:
       matrix:
-        version: ["3.6-stable"]
+        version: ["3.5.3-stable", "3.6-stable"]
         csharp: [true, false]
-        platform: ["Windows", "Linux", "Mac"]
+        platform: ["Windows", "Linux"]
 
     steps:
       - name: Checkout Repository
