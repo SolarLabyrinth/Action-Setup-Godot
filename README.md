@@ -10,7 +10,7 @@ This action will download export templates and provide access to the godot binar
 
 ```yml
 - name: Setup Godot
-  uses: SolarLabyrinth/Action-Setup-Godot@v2
+  uses: solarlabyrinth/action-setup-godot@v2
   with:
     version: 4.4.1-stable
 
@@ -19,11 +19,12 @@ This action will download export templates and provide access to the godot binar
     mkdir -p ./build
     godot --headless --export-debug "Windows" ./build/game.exe
 ```
+
 ### Variables
 
 ```yml
 - name: Setup Godot
-  uses: SolarLabyrinth/Action-Setup-Godot@v2
+  uses: solarlabyrinth/action-setup-godot@v2
   with:
     version: 4.4.1-stable
     # Optional. Defaults to false
@@ -36,11 +37,11 @@ This action will download export templates and provide access to the godot binar
 
 This action is tested by exporting a small Godot project to the following target platforms.
 
-|Version|Windows|Linux|Mac|Windows - C#|Linux - C#|Mac - C#|
-|-------|-------|-----|---|------------|----------|--------|
-|4.5-dev1|✅|✅|✅|✅|✅|✅|
-|4.4.1-stable|✅|✅|✅|✅|✅|✅|
-|4.3-stable|✅|✅|✅|✅|✅|✅|
-|4.2.2-stable|✅|✅|✅|✅|✅|✅|
-|4.1.4-stable|✅|✅|✅|✅|✅|✅|
-|4.0.4-stable|✅|✅|✅|✅|✅|✅|
+| Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
+| ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
+| 4.5-dev1     | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.4.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.3-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.2.2-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.1.4-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.0.4-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
