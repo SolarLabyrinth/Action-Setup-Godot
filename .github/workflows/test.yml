@@ -18,7 +18,7 @@ jobs:
             "4.2.2-stable",
             "4.3-stable",
             "4.4.1-stable",
-            "4.5-dev1",
+            "4.5-beta1",
           ]
         csharp: [true, false]
         platform: ["Windows", "Linux", "Mac"]
