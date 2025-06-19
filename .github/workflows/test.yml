@@ -61,3 +61,31 @@ jobs:
 
       - name: Confirm Godot Setup
         run: ${{ matrix.name }} --version
+
+  windows:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        version: ["4.4.1-stable"]
+        csharp: [true, false]
+        platform: ["Windows", "Linux", "Mac"]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: ./
+        with:
+          version: ${{ matrix.version }}
+          csharp: ${{ matrix.csharp }}
+
+      - name: Confirm Godot Setup
+        run: godot --version
+
+      - name: Build ${{ matrix.platform }}
+        run: |
+          cd ./project
+          mkdir -p ./build
+          godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}

@@ -3,8 +3,8 @@ name: "Action Setup Godot"
 description: "Downloads the specified Godot version and its Export Templates from the godotengine/godot-builds repo on GitHub."
 
 branding:
-  icon: 'play'
-  color: 'blue'
+  icon: "play"
+  color: "blue"
 
 inputs:
   version:
