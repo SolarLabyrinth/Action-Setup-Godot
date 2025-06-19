@@ -39,7 +39,7 @@ This action is tested by exporting a small Godot project to the following target
 
 | Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
 | ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
-| 4.5-dev1     | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.5-beta1    | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.4.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.3-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.2.2-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
