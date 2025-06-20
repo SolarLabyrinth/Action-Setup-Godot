@@ -25,8 +25,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Godot
+    - name: Install Godot on Linux
       shell: bash
+      if: runner.os == 'Linux'
       run: |
         INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
         mkdir -p $INSTALL_DIR
@@ -57,17 +58,58 @@ runs:
         ls -la $INSTALL_DIR
         echo $INSTALL_DIR >> $GITHUB_PATH
 
+    - name: Install Godot on Windows
+      shell: bash
+      if: runner.os == 'Windows'
+      run: |
+        INSTALL_DIR=${HOME}/.godot-install-dir/${{ inputs.version }}
+        mkdir -p $INSTALL_DIR
+
+        echo "Creating $INSTALL_DIR"
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_win64.zip
+        else
+          GODOT_DOWNLOAD_URL=https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_win64.exe.zip
+        fi
+
+        echo "Downloading: $GODOT_DOWNLOAD_URL"
+
+        cd $INSTALL_DIR
+        curl -sSL -o godot.zip $GODOT_DOWNLOAD_URL
+        unzip godot.zip
+        rm -rf godot.zip
+
+        if [ "${{ inputs.csharp }}" = "true" ]; then
+          mv Godot_v${{ inputs.version }}_mono_win64/* .
+          mv Godot_v${{ inputs.version }}_mono_win64.exe ${{ inputs.name }}
+          rm -rf Godot_v${{ inputs.version }}_mono_win64
+        else
+          mv Godot_v${{ inputs.version }}_win64.exe ${{ inputs.name }}
+        fi
+
+        ls -la $INSTALL_DIR
+        echo $INSTALL_DIR >> $GITHUB_PATH
+
     - name: Download Export Templates
       shell: bash
       run: |
         cd $RUNNER_TEMP
 
         if [ "${{ inputs.csharp }}" = "true" ]; then
-          wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_export_templates.tpz
-          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}.mono
+          curl -sSL -o templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_mono_export_templates.tpz
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}.mono
+          else
+            EXPORT_TEMPLATES_DIR=${APPDATA}/Godot/export_templates/${INPUTS_VERSION/-/.}.mono
+          fi
         else
-          wget -O templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
-          EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
+          curl -sSL -o templates.tpz -q https://github.com/godotengine/godot-builds/releases/download/${{ inputs.version }}/Godot_v${{ inputs.version }}_export_templates.tpz
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            EXPORT_TEMPLATES_DIR=${HOME}/.local/share/godot/export_templates/${INPUTS_VERSION/-/.}
+          else
+            EXPORT_TEMPLATES_DIR=${APPDATA}/Godot/export_templates/${INPUTS_VERSION/-/.}
+          fi
         fi
 
         unzip templates.tpz
