@@ -97,10 +97,10 @@ jobs:
           include-templates: true
 
       - name: Confirm Godot Setup
-        run: godot.exe --version
+        run: godot --version
 
       - name: Build ${{ matrix.platform }}
         run: |
           cd ./project
           mkdir -p ./build
-          godot.exe --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
+          godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
