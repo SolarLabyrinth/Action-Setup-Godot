@@ -79,11 +79,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Godot
-        uses: ./
+      # - name: Setup Godot
+      #   uses: ./
+      #   with:
+      #     version: ${{ matrix.version }}
+      #     csharp: ${{ matrix.csharp }}
+
+      - uses: chickensoft-games/setup-godot@v2
+        name: 🤖 Setup Godot
         with:
+          # Version must include major, minor, and patch, and be >= 4.0.0
+          # Pre-release label is optional.
           version: ${{ matrix.version }}
-          csharp: ${{ matrix.csharp }}
+          # Use .NET-enabled version of Godot (the default is also true).
+          use-dotnet: ${{ matrix.csharp }}
+          # Include the Godot Export Templates (the default is false).
+          include-templates: true
 
       - name: Confirm Godot Setup
         run: godot.exe --version
