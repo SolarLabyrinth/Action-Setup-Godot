@@ -86,10 +86,10 @@ jobs:
           csharp: ${{ matrix.csharp }}
 
       - name: Confirm Godot Setup
-        run: godot --version
+        run: godot.exe --version
 
       - name: Build ${{ matrix.platform }}
         run: |
           cd ./project
           mkdir -p ./build
-          godot --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}
+          godot.exe --headless --export-debug "${{ matrix.platform }}" ./build/game.${{ matrix.platform == 'Mac' && 'zip' || 'x86_64' }}

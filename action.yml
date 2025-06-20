@@ -82,10 +82,10 @@ runs:
 
         if [ "${{ inputs.csharp }}" = "true" ]; then
           mv Godot_v${{ inputs.version }}_mono_win64/* .
-          mv Godot_v${{ inputs.version }}_mono_win64.exe ${{ inputs.name }}
+          mv Godot_v${{ inputs.version }}_mono_win64.exe ${{ inputs.name }}.exe
           rm -rf Godot_v${{ inputs.version }}_mono_win64
         else
-          mv Godot_v${{ inputs.version }}_win64.exe ${{ inputs.name }}
+          mv Godot_v${{ inputs.version }}_win64.exe ${{ inputs.name }}.exe
         fi
 
         ls -la $INSTALL_DIR
