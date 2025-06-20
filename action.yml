@@ -89,9 +89,7 @@ runs:
         fi
 
         ls -la $INSTALL_DIR
-        echo $INSTALL_DIR
-        echo $GITHUB_PATH
-        echo $INSTALL_DIR >> $GITHUB_PATH
+        Add-Content -Path $env:GITHUB_PATH -Value $INSTALL_DIR
 
     - name: Download Export Templates
       shell: bash
