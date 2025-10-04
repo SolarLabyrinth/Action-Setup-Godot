@@ -26,6 +26,7 @@ This action will download export templates and provide access to the godot binar
 - name: Setup Godot
   uses: solarlabyrinth/action-setup-godot@v2
   with:
+    # Required. The name of a release from here: https://github.com/godotengine/godot-builds/releases
     version: 4.4.1-stable
     # Optional. Defaults to false
     csharp: false
@@ -39,7 +40,9 @@ This action is tested by exporting a small Godot project to the following target
 
 | Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
 | ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
-| 4.5-beta1    | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.6-dev1     | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.5.1-rc1    | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.5-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.4.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.3-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.2.2-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
