@@ -36,13 +36,12 @@ This action will download export templates and provide access to the godot binar
 
 ### Supported Versions
 
-This action is tested by exporting a small Godot project to the following target platforms.
+Any version of 4.X should work, even ones not listed here. These are the versions my test suite runs against by exporting a small Godot project to the following target platforms.
 
 | Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
 | ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
-| 4.6-dev1     | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
-| 4.5.1-rc1    | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
-| 4.5-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.6-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.5.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.4.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.3-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.2.2-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
