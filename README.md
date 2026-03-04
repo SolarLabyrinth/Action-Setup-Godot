@@ -12,7 +12,7 @@ This action will download export templates and provide access to the godot binar
 - name: Setup Godot
   uses: solarlabyrinth/action-setup-godot@v2
   with:
-    version: 4.4.1-stable
+    version: 4.6-stable
 
 - name: Build Game
   run: |
@@ -27,7 +27,7 @@ This action will download export templates and provide access to the godot binar
   uses: solarlabyrinth/action-setup-godot@v2
   with:
     # Required. The name of a release from here: https://github.com/godotengine/godot-builds/releases
-    version: 4.4.1-stable
+    version: 4.6-stable
     # Optional. Defaults to false
     csharp: false
     # Optional. Defaults to "godot"
