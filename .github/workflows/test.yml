@@ -13,7 +13,6 @@ jobs:
       matrix:
         version:
           [
-            "4.7-dev2",
             "4.0.4-stable",
             "4.1.4-stable",
             "4.2.2-stable",
@@ -21,6 +20,7 @@ jobs:
             "4.4.1-stable",
             "4.5.1-stable",
             "4.6.1-stable",
+            "4.7-dev2",
           ]
         csharp: [true, false]
         platform: ["Windows", "Linux", "Mac"]
