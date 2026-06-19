@@ -63,3 +63,32 @@ jobs:
 
       - name: Confirm Godot Setup
         run: ${{ matrix.name }} --version
+
+  export-templates:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        csharp: [true, false]
+        include:
+          - csharp: true
+            templates_dir: "4.4.1.stable.mono"
+          - csharp: false
+            templates_dir: "4.4.1.stable"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot Without Export Templates
+        uses: ./
+        with:
+          version: "4.4.1-stable"
+          csharp: ${{ matrix.csharp }}
+          export-templates: false
+
+      - name: Confirm Godot Setup
+        run: godot --version
+
+      - name: Confirm Export Templates Were Not Installed
+        run: test ! -d "$HOME/.local/share/godot/export_templates/${{ matrix.templates_dir }}"
