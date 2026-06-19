@@ -10,7 +10,7 @@ This action will download export templates and provide access to the godot binar
 
 ```yml
 - name: Setup Godot
-  uses: solarlabyrinth/action-setup-godot@v2
+  uses: solarlabyrinth/action-setup-godot@v3
   with:
     version: 4.6.1-stable
 
@@ -24,7 +24,7 @@ This action will download export templates and provide access to the godot binar
 
 ```yml
 - name: Setup Godot
-  uses: solarlabyrinth/action-setup-godot@v2
+  uses: solarlabyrinth/action-setup-godot@v3
   with:
     # Required. The name of a release from here: https://github.com/godotengine/godot-builds/releases
     version: 4.6.1-stable
@@ -32,6 +32,8 @@ This action will download export templates and provide access to the godot binar
     csharp: false
     # Optional. Defaults to "godot"
     name: godot
+    # Optional. Whether export templates should be installed. Defaults to true
+    export-templates: true
 ```
 
 ### Tested Versions

@@ -3,8 +3,8 @@ name: "Action Setup Godot"
 description: "Downloads the specified Godot version and its Export Templates from the godotengine/godot-builds repo on GitHub."
 
 branding:
-  icon: 'play'
-  color: 'blue'
+  icon: "play"
+  color: "blue"
 
 inputs:
   version:
@@ -20,6 +20,11 @@ inputs:
     description: "The name to use for the godot executable. Defaults to 'godot'"
     default: "godot"
     type: string
+    required: true
+  export-templates:
+    description: "Whether export templates should be installed"
+    type: boolean
+    default: true
     required: true
 
 runs:
@@ -58,6 +63,7 @@ runs:
         echo $INSTALL_DIR >> $GITHUB_PATH
 
     - name: Download Export Templates
+      if: ${{ inputs.export-templates == 'true' }}
       shell: bash
       run: |
         cd $RUNNER_TEMP
