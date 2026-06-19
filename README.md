@@ -12,7 +12,7 @@ This action will download export templates and provide access to the godot binar
 - name: Setup Godot
   uses: solarlabyrinth/action-setup-godot@v3
   with:
-    version: 4.6.1-stable
+    version: 4.7-stable
 
 - name: Build Game
   run: |
@@ -27,7 +27,7 @@ This action will download export templates and provide access to the godot binar
   uses: solarlabyrinth/action-setup-godot@v3
   with:
     # Required. The name of a release from here: https://github.com/godotengine/godot-builds/releases
-    version: 4.6.1-stable
+    version: 4.7-stable
     # Optional. Defaults to false
     csharp: false
     # Optional. Defaults to "godot"
@@ -42,7 +42,7 @@ Any version of 4.X should work, even ones not listed here. These are the version
 
 | Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
 | ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
-| 4.7-dev2     | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
+| 4.7-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.6.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.5.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.4.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
