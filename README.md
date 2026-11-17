@@ -42,6 +42,7 @@ Any version of 4.X should work, even ones not listed here. These are the version
 
 | Version      | Windows | Linux | Mac | Windows - C# | Linux - C# | Mac - C# |
 | ------------ | ------- | ----- | --- | ------------ | ---------- | -------- |
+| 4.8-beta3    | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.7-stable   | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.6.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
 | 4.5.1-stable | ✅      | ✅    | ✅  | ✅           | ✅         | ✅       |
