@@ -11,8 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        version:
-          [
+        version: [
             "4.0.4-stable",
             "4.1.4-stable",
             "4.2.2-stable",
@@ -21,7 +20,8 @@ jobs:
             "4.5.1-stable",
             "4.6.1-stable",
             "4.7-stable",
-            "4.8-beta3",
+            "4.8-dev7",
+            # "4.8-beta3", # crashes
           ]
         csharp: [true, false]
         platform: ["Windows", "Linux", "Mac"]
